@@ -1,0 +1,42 @@
+
+<div class="container">
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Course code </th>
+            <th scope="col">Title</th>
+            <th scope="col">Pages</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of books">
+            <th scope="row">1</th>
+            <td>{{ book.courseCode }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.pages }}</td>
+            </tr>
+        </tbody>
+        </table>
+        <form #bookForm="ngForm" (ngSubmit)="saveBook(bookForm)">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="col-7">
+                        <input type="text" ngModel name="title" class="form-control" placeholder="title">
+                    </div>
+                    <div class="col">
+                        <input type="text" ngModel name="courseCode" class="form-control" placeholder="code">
+                    </div>
+                    <div class="col">
+                        <input type="text" ngModel name="pages" class="form-control" placeholder="pages">
+                    </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">
+                    <span>Add</span>
+                </button>
+            </div>
+        </form>
+</div>
+
