@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { BookData } from './book/bookData';
 
 @Injectable({
@@ -12,12 +12,12 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(){
-    return this.http.get(`${this.apiUrl}/book/all`);
-  }
+  getBooks$ = () => this.http.get(`${this.apiUrl}/book/all`);
 
-  saveBooks(book: BookData){
-    console.log(book);
-    return this.http.post(`${this.apiUrl}/book/save`, book);
-  }
+  saveBooks$ = (book: BookData) => 
+    <Observable<BookData>> this.http.post<BookData>(`${this.apiUrl}/book/save`, book)
+    .pipe(
+      tap(console.log)
+    );
+  
 }
